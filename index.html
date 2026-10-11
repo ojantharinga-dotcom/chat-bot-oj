@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OJ AI - Smart Chatbot Assistant</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+</head>
+<body>
+
+  <!-- Demo Website Content -->
+  <main class="demo-container">
+    <section class="demo-hero">
+      <h1>OJ AI සහායකයා (Chatbot Demo)</h1>
+      <p>OJ AI මගින් බලගැන්වූ නවීන වෙබ් Chatbot එකක්. පහළ දකුණු කෙළවරේ ඇති නිල් පැහැති icon එක ක්ලික් කර OJ AI අත්හදා බලන්න.</p>
+      
+      <div class="demo-features">
+        <div class="feature-card">
+          <h3>⚡ ක්ෂණික පිළිතුරු</h3>
+          <p>OJ AI ආධාරයෙන් ඕනෑම ප්‍රශ්නයකට හෝ කේතයකට ක්ෂණිකව නිවැරදි ප්‍රතිචාර ලබා දේ.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🇱🇰 සිංහල භාෂා සහය</h3>
+          <p>සිංහල හෝ ඉංග්‍රීසි භාෂා දෙකෙන්ම පහසුවෙන් සුහදව අදහස් හුවමාරු කරගත හැක.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📱 Responsive & Modern UI</h3>
+          <p>Mobile දුරකථන සහ පරිගණක සඳහා අලංකාරව සකසන ලද modern interface එකක්.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating Chat Bubble Trigger Button -->
+  <button id="chat-bubble" aria-label="Open Chat with OJ AI" title="Chat with OJ AI">
+    <div class="bubble-pulse"></div>
+    <!-- Chat Icon -->
+    <svg class="bubble-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <!-- Close Icon -->
+    <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <!-- Chat Popup Window -->
+  <aside class="chat-popup" id="chat-popup" aria-hidden="true">
+    <!-- Header -->
+    <header class="chat-header">
+      <div class="chat-header-info">
+        <div class="bot-avatar">
+          <span class="avatar-badge">OJ</span>
+        </div>
+        <div class="chat-header-text">
+          <h2>OJ AI Assistant</h2>
+          <div class="chat-status">
+            <span>●</span> සක්‍රියයි (Online)
+          </div>
+        </div>
+      </div>
+      <div class="chat-header-actions">
+        <!-- Clear chat button -->
+        <button id="clear-chat-btn" class="chat-header-btn" title="Clear Chat" aria-label="Clear Chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
+        <!-- Minimize button -->
+        <button id="close-chat-btn" class="chat-header-btn" title="Close" aria-label="Close Chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Message Display Container -->
+    <div class="chat-messages" id="chat-messages">
+      <!-- Welcome Message Card -->
+      <div class="chat-welcome" id="chat-welcome">
+        <div class="welcome-icon">✨</div>
+        <h3>ආයුබෝවන්! 👋</h3>
+        <p>මම ඔබේ <strong>OJ AI</strong> සහායකයා. මගෙන් ඔබට අවශ්‍ය ඕනෑම දෙයක් අසන්න හෝ පහතින් මාතෘකාවක් තෝරන්න:</p>
+        
+        <!-- Suggestions Chips -->
+        <div class="chat-suggestions">
+          <button class="suggestion-chip" data-prompt="ඔයා කවුද?">👋 ඔයා කවුද?</button>
+          <button class="suggestion-chip" data-prompt="ඔබට කළ හැකි දේවල් මොනවාද?">💡 කළ හැකි දේ</button>
+          <button class="suggestion-chip" data-prompt="මට සරල JavaScript code එකක් ලියන්න.">💻 JS Code එකක්</button>
+          <button class="suggestion-chip" data-prompt="Tell me a fun science fact!">🚀 Fun Fact</button>
+        </div>
+      </div>
+
+      <!-- Messages will appear here dynamically -->
+    </div>
+
+    <!-- Typing Dots Animation -->
+    <div class="typing-indicator" id="typing-indicator">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+    </div>
+
+    <!-- Input Footer -->
+    <footer class="chat-input-area">
+      <div class="chat-input-wrapper">
+        <input 
+          type="text" 
+          id="chat-input" 
+          placeholder="OJ AI ට පණිවිඩයක් ලියන්න... (Message OJ AI)" 
+          autocomplete="off"
+        >
+      </div>
+      <button id="send-btn" class="send-btn" aria-label="Send message to OJ AI" title="Send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </footer>
+    <div class="chat-footer-brand">Powered by OJ AI</div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
